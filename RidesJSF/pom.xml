@@ -83,7 +83,6 @@
 			<groupId>1.0</groupId>
 			<artifactId>Rides24</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 	<build>

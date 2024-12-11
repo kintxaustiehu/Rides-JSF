@@ -3,7 +3,7 @@ package beans;
 import java.io.Serializable;
 import java.util.Date;
 
-import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.component.UIInput;
@@ -11,7 +11,7 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
 @Named("login")
-@ApplicationScoped
+@SessionScoped
 public class LoginBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -21,6 +21,8 @@ public class LoginBean implements Serializable {
 	private Date date;
 
 	public LoginBean() {
+		this.date = new Date();
+		;
 	}
 
 	public Date getDate() {

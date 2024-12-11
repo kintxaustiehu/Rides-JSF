@@ -4,13 +4,53 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-   <h:head>
-            <title>My Rides</title>
-            <h:outputStylesheet library="css" name="style.css" />
-        </h:head>
-        <h:body>
-            <h:form>
-                <h3>My Rides page is not implemented yet.</h3>
-            </h:form>
-        </h:body>
+    <h:head>
+        <title>My Rides</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <div class="form-container">
+                <div class="form-row">
+                    <h3>Welcome, 
+                        <h:outputText value="#{login.username}"/>!
+                    </h3>
+                </div>
+                <div class="form-row">
+                    <h4>Today is 
+                        <h:outputText value="#{login.date}"/>.
+                    </h4>
+                </div>
+            </div>
+        </h:form>
+        <div class="form-container">
+            <h:dataTable id="tabla" value="#{myRides.rides}" var="item" border="1">
+                <f:facet name="header">Your rides:</f:facet>
+                <h:column>
+                    <f:facet name="header">From</f:facet>
+                    #{item.getFrom()} 
+                </h:column>
+                <h:column>
+                    <f:facet name="header">To</f:facet>
+                    #{item.getTo()} 
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Seats</f:facet>
+                    #{item.getnPlaces()} 
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Date</f:facet>
+                    #{item.getDate()} 
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Price</f:facet>
+                    #{item.getPrice()} 
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Driver</f:facet>
+                    #{item.getDriver().getName()} 
+                </h:column>
+            </h:dataTable>
+        </div>
+    </h:body>
 </html>

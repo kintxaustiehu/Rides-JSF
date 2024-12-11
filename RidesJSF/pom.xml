@@ -64,27 +64,21 @@
 			<version>4.0.1</version>
 		</dependency>
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>5.6.15.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>jakarta.persistence</groupId>
-			<artifactId>jakarta.persistence-api</artifactId>
-			<version>2.2.3</version>
-		</dependency>
-		<!-- MariaDB JDBC Driver -->
-		<dependency>
-			<groupId>org.mariadb.jdbc</groupId>
-			<artifactId>mariadb-java-client</artifactId>
-			<version>3.1.4</version>
-		</dependency>
-		<dependency>
-			<groupId>1.0</groupId>
-			<artifactId>Rides24</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>compile</scope>
-		</dependency>
+		 <groupId>org.hibernate</groupId>
+		 <artifactId>hibernate-core</artifactId>
+		 <version>5.6.15.Final</version>
+		 </dependency>
+		 <dependency>
+			 <groupId>jakarta.persistence</groupId>
+			 <artifactId>jakarta.persistence-api</artifactId>
+			 <version>2.2.3</version>
+		 </dependency>
+		 <!-- MariaDB JDBC Driver -->
+		 <dependency>
+			 <groupId>org.mariadb.jdbc</groupId>
+			 <artifactId>mariadb-java-client</artifactId>
+			 <version>3.1.4</version>
+		 </dependency>
 	</dependencies>
 	<build>
 		<plugins>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Buscar Rides</title>
+</h:head>
+<h:body>
+    <h:form>
+    	<h1>Buscar Rides</h1>
+        <table>
+			<tr>
+				<td>Origen</td>
+				<td>
+					<p:selectOneMenu id="origen"
+						value="#{queryRides.origen}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItems value="#{queryRides.origenes}" var="origen"
+							itemValue="#{origen}" itemLabel="#{origen}" />
+						<p:ajax event="change"
+							listener="#{queryRides.updateDestinos}"
+							update="destinoCity" />
+					</p:selectOneMenu>
+				</td>
+			</tr>
+			<tr>
+				<td>Destino</td>
+				<td><p:selectOneMenu id="destinoCity"
+						value="#{queryRides.destino}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItems value="#{queryRides.destinos}" var="destino"
+							itemValue="#{destino}" itemLabel="#{destino}" />
+					</p:selectOneMenu></td>
+			</tr>
+			<tr>
+				<td>Fecha:</td>
+				<td><p:calendar id="data" value="#{queryRides.fecha}"
+						navigator="true" mode="inline">
+					</p:calendar></td>
+			</tr>
+			<tr>
+				<td>
+					<p:commandButton value="Buscar rides" action="#{queryRides.searchRides}" update="resultados" />
+				</td>
+			</tr>
+		</table>
+
+        <!-- Resultados -->
+        <p:dataTable id="resultados" value="#{rideQueryBean.rides}" var="ride"
+                     border="1" paginator="true" rows="10">
+            <p:column headerText="Driver">
+                <h:outputText value="#{ride.driver.name}" />
+            </p:column>
+            <p:column headerText="Seats">
+                <h:outputText value="#{ride.nPlaces}" />
+            </p:column>
+            <p:column headerText="Price">
+                <h:outputText value="#{ride.price}" />
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</h:body>
+</html>

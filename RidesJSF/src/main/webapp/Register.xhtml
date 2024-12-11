@@ -1,24 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>User Registration</title>
+        <title>Registrarse</title>
     </h:head>
     <h:body>
         <h:form>
-            <h:panelGrid columns="2">
-                <h:outputLabel value="Username:" />
-                <h:inputText value="#{userRegistrationBean.user.username}" required="true"/>
-                
-                <h:outputLabel value="Password:" />
-                <h:inputSecret value="#{userRegistrationBean.user.password}" required="true"/>
-                
-                <h:outputLabel value="Email:" />
-                <h:inputText value="#{userRegistrationBean.user.email}" required="true"/>
-                
-                <h:commandButton value="Register" action="#{userRegistrationBean.register}"/>
-            </h:panelGrid>
-        </h:form>
+        	<h1>Registrarse</h1>
+			<table>
+				<tr>
+					<td>Nombre:</td>
+					<td>
+						<h:inputText id="nombre" value="#{register.nombre}"
+							required="true" requiredMessage="Campo obligatorio">
+						</h:inputText>
+						<h:message for="nombre" style="color:red" />
+					</td>
+				</tr>
+				<tr>
+					<td>Correo electrónico:</td>
+					<td>
+						<h:inputText id="email" value="#{register.email}"
+							required="true" requiredMessage="Campo obligatorio">
+							<f:validateRegex
+								pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
+								validatorMessage="Debe ser un email: example@example.com" />
+						</h:inputText>
+						<h:message for="email" style="color:red" />
+					</td>
+				</tr>
+				<tr>
+					<td>Contraseña:</td>
+					<td>
+						<h:inputSecret id="password" value="#{register.password}"
+							required="true" requiredMessage="Campo obligatorio"/>
+						<h:message for="password" style="color:red" />
+					</td>
+				</tr>
+				<tr>
+					<td>Repite tu contraseña:</td>
+					<td>
+						<h:inputSecret id="repeatedPassword" value="#{register.repeatedPassword}"
+							required="true" requiredMessage="Campo obligatorio"/>
+						<h:message for="repeatedPassword" style="color:red" />
+					</td>
+				</tr>
+			</table>
+			<p:commandButton value="Registrarse" update="@form" action="#{register.register}"/>
+				
+			<h:messages id="errores" globalOnly="true" style="color:red" />
+		</h:form>
     </h:body>
 </html>

@@ -8,6 +8,7 @@
 </h:head>
 <h:body>
     <h:form>
+    	<h:link value="Cerrar sesión" outcome="/Login.xhtml"/>
     	<h1>Buscar Rides</h1>
         <table>
 			<tr>
@@ -43,6 +44,8 @@
 				</td>
 			</tr>
 		</table>
+		
+		<h:link value="Crear nuevo Ride" outcome="/CreateRide.xhtml"/>
 
         <!-- Resultados -->
         <p:dataTable id="resultados" value="#{queryRides.rides}" var="ride"

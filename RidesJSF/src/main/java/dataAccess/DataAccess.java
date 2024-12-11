@@ -99,7 +99,6 @@ public class DataAccess {
     }
 
     public List<Ride> getRides(String from, String to, Date date) {
-    	System.out.println("getRides");
         EntityManager em = JPAUtil.getEntityManager();
         try {
         	return em.createQuery("SELECT r FROM Ride r WHERE r.origin = :from AND r.destination = :to AND r.date = :date", Ride.class)
@@ -134,6 +133,48 @@ public class DataAccess {
         } catch (Exception e) {
             em.getTransaction().rollback();
             throw e;
+        } finally {
+            em.close();
+        }
+    }
+    
+    public boolean login(String email, String password) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            Long count = em.createQuery("SELECT COUNT(d) FROM Driver d WHERE d.email = :email AND d.password = :password", Long.class)
+                           .setParameter("email", email)
+                           .setParameter("password", password)
+                           .getSingleResult();
+
+            return count > 0;
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Driver> getAllDrivers() {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            return em.createQuery("SELECT d FROM Driver d", Driver.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public void createRide(String origen, String destino, Date date, int nPlaces, float price, Driver driver) throws Exception {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            em.getTransaction().begin();
+
+            Ride ride = new Ride(origen, destino, date, nPlaces, price, driver);
+
+            em.persist(ride);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw new Exception("Error al crear el viaje: " + e.getMessage());
         } finally {
             em.close();
         }

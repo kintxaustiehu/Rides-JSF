@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Crear Ride</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h1>Crear Ride</h1>
+
+        <table>
+            <tr>
+                <td>Conductor:</td>
+                <td>
+                    <p:selectOneMenu id="driver" value="#{createRide.selectedDriver}" required="true" converter="driverConverter">
+					    <f:selectItem itemLabel="Seleccione un conductor" itemValue="" />
+					    <f:selectItems value="#{createRide.drivers}" var="driver" itemValue="#{driver}" itemLabel="#{driver.email}" />
+					</p:selectOneMenu>
+					<h:message for="driver" style="color:red" />
+                </td>
+            </tr>
+            <tr>
+                <td>Origen:</td>
+                <td>
+                    <h:inputText id="origen" value="#{createRide.origen}" required="true" requiredMessage="Campo obligatorio" />
+                    <h:message for="origen" style="color:red" />
+                </td>
+            </tr>
+            <tr>
+                <td>Destino:</td>
+                <td>
+                    <h:inputText id="destino" value="#{createRide.destino}" required="true" requiredMessage="Campo obligatorio" />
+                    <h:message for="destino" style="color:red" />
+                </td>
+            </tr>
+            <tr>
+                <td>Fecha:</td>
+                <td>
+                    <p:calendar id="fecha" value="#{createRide.fecha}" navigator="true" required="true" requiredMessage="Campo obligatorio" />
+                    <h:message for="fecha" style="color:red" />
+                </td>
+            </tr>
+            <tr>
+                <td>Plazas:</td>
+                <td>
+                    <h:inputText id="nPlaces" value="#{createRide.nPlaces}" required="true" requiredMessage="Campo obligatorio" />
+                    <h:message for="nPlaces" style="color:red" />
+                </td>
+            </tr>
+            <tr>
+                <td>Precio:</td>
+                <td>
+                    <h:inputText id="price" value="#{createRide.price}" required="true" requiredMessage="Campo obligatorio" />
+                    <h:message for="price" style="color:red" />
+                </td>
+            </tr>
+        </table>
+
+        <p:commandButton value="Crear Ride" action="#{createRide.createRide}" update="@form" />
+
+        <h:messages globalOnly="true" style="color:red" />
+    </h:form>
+</h:body>
+</html>

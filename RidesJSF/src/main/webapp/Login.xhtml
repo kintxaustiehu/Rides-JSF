@@ -2,40 +2,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Login</title>
+        <title>Login Page</title>
+        <h:outputScript library="js" name="infoJavaScript.js" />
+        <h:outputStylesheet library="css" name="style.css" />
     </h:head>
     <h:body>
-        <h:form>
-        	<h1>Login</h1>
-			<table>
-				<tr>
-					<td>Correo electrónico:</td>
-					<td>
-						<h:inputText id="email" value="#{login.email}"
-							required="true" requiredMessage="Campo obligatorio">
-							<f:validateRegex
-								pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
-								validatorMessage="Debe ser un email: example@example.com" />
-						</h:inputText>
-						<h:message for="email" style="color:red" />
-					</td>
-				</tr>
-				<tr>
-					<td>Contraseña:</td>
-					<td>
-						<h:inputSecret id="password" value="#{login.password}"
-							required="true" requiredMessage="Campo obligatorio"/>
-						<h:message for="password" style="color:red" />
-					</td>
-				</tr>
-			</table>
-			<p:commandButton value="logIn" update="@form errores" action="#{login.login}"/>
-				
-			<h:messages id="errores" globalOnly="true" style="color:red" />
-			
-			<h:link value="Registrarse" outcome="/Register.xhtml"/>
-		</h:form>
+        <h:form id="myForm">
+            <div class="form-container">
+                <div class="form-row">
+                    <h:outputLabel for="username" value="Username:" />
+                    <h:inputText id="username" value="#{login.username}" required="true" requiredMessage="Username is required.">
+                        <f:validator validatorId="customRegexValidator" />
+                    </h:inputText>
+                </div>
+                <div class="form-row">
+                    <h:message for=":myForm:username" class="message" />
+                </div>
+                <div class="form-row">
+                    <h:outputLabel for="password" value="Password:" />
+                    <h:inputSecret id="password" value="#{login.password}" required="true" requiredMessage="Password is required.">
+                        <f:validator validatorId="customRegexValidator" />
+                    </h:inputSecret>
+                </div>
+                <div class="form-row">
+                    <h:message for=":myForm:password" class="message" />
+                </div>
+                <div class="form-row">
+                    <h:commandButton value="Login" action="#{login.validate}"/>
+                </div>
+                <div class="form-row">
+                    <h:outputLabel value="Don't have an account yet?" />
+                    <h:commandLink value="Register" action="#{login.register}" immediate="true" />
+                </div>
+                <h:messages id="messages" style="color:blue"/>
+            </div>      
+        </h:form>
     </h:body>
 </html>

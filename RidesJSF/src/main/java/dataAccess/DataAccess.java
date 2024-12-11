@@ -138,20 +138,6 @@ public class DataAccess {
         }
     }
     
-    public boolean login(String email, String password) {
-        EntityManager em = JPAUtil.getEntityManager();
-        try {
-            Long count = em.createQuery("SELECT COUNT(d) FROM Driver d WHERE d.email = :email AND d.password = :password", Long.class)
-                           .setParameter("email", email)
-                           .setParameter("password", password)
-                           .getSingleResult();
-
-            return count > 0;
-        } finally {
-            em.close();
-        }
-    }
-    
     public List<Driver> getAllDrivers() {
         EntityManager em = JPAUtil.getEntityManager();
         try {
@@ -179,4 +165,22 @@ public class DataAccess {
             em.close();
         }
     }
+    
+    public Driver validateUser(String email, String password) {
+		EntityManager em = JPAUtil.getEntityManager();
+		try {
+			Query query = em.createQuery("SELECT d FROM Driver d WHERE d.email = :email AND d.password = :password",
+					Driver.class);
+			query.setParameter("email", email);
+			query.setParameter("password", password);
+
+			List<Driver> result = query.getResultList();
+			if (!result.isEmpty()) {
+				return result.get(0); // Return the first matching user
+			}
+			return null; // No user found
+		} finally {
+			em.close();
+		}
+	}
 }

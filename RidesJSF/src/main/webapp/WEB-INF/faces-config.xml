@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config
-	xmlns="https://jakarta.ee/xml/ns/jakartaee"
+<faces-config xmlns="https://jakarta.ee/xml/ns/jakartaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
-https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd"
 	version="3.0">
 	<converter>
-        <converter-for-class>domain.Driver</converter-for-class>
-        <converter-class>converters.DriverConverter</converter-class>
-    </converter>
-	
+		<converter-for-class>domain.Driver</converter-for-class>
+		<converter-class>converters.DriverConverter</converter-class>
+	</converter>
+
 	<managed-bean>
 		<managed-bean-name>createRide</managed-bean-name>
 		<managed-bean-class>beans.CreateRideBean</managed-bean-class>
@@ -25,18 +23,41 @@ https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd"
 		<managed-bean-class>beans.UserRegistrationBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>login</managed-bean-name>
-		<managed-bean-class>beans.UserLoginBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	
+
 	<navigation-rule>
-	    <display-name>Login.xhtml</display-name>
-	    <from-view-id>/Login.xhtml</from-view-id>
-	    <navigation-case>
-	        <from-outcome>ok</from-outcome>
-	        <to-view-id>/QueryRides.xhtml</to-view-id>
-	    </navigation-case>
+		<display-name>Login.xhtml</display-name>
+		<from-view-id>/Login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>ok</from-outcome>
+			<to-view-id>/MyRides.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/MyRides.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>CreateRide</from-outcome>
+			<to-view-id>/CreateRide.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>MyRides</from-outcome>
+			<to-view-id>/MyRides.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>Login</from-outcome>
+			<to-view-id>/Login.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>Register</from-outcome>
+			<to-view-id>/Register.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<validator>
+		<validator-id>customRegexValidator</validator-id>
+		<validator-class>validators.CustomRegexValidator</validator-class>
+	</validator>
 </faces-config>

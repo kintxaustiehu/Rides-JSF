@@ -14,7 +14,7 @@
             <tr>
                 <td>Conductor:</td>
                 <td>
-                    <p:selectOneMenu id="driver" value="#{createRide.selectedDriver}" required="true" converter="driverConverter">
+                    <p:selectOneMenu id="driver" value="#{createRide.selectedDriver}" required="true">
 					    <f:selectItem itemLabel="Seleccione un conductor" itemValue="" />
 					    <f:selectItems value="#{createRide.drivers}" var="driver" itemValue="#{driver}" itemLabel="#{driver.email}" />
 					</p:selectOneMenu>

@@ -26,10 +26,6 @@ public class BLFacadeImplementation implements Serializable{
         return dataAccess.createDriver(email, name, password);
     }
     
-    public boolean login(String email, String password) {
-    	return dataAccess.login(email, password);
-    }
-    
     public List<Driver> getAllDrivers() {
         return dataAccess.getAllDrivers();
     }
@@ -37,4 +33,8 @@ public class BLFacadeImplementation implements Serializable{
     public void createRide(String origen, String destino, Date date, int nPlaces, float price, Driver driver) throws Exception {
         dataAccess.createRide(origen, destino, date, nPlaces, price, driver);
     }
+    
+    public Driver validateUser(String email, String password) {
+		return dataAccess.validateUser(email, password);
+	}
 }

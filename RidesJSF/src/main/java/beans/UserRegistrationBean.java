@@ -9,20 +9,20 @@ public class UserRegistrationBean {
 	private String nombre;
 	private String password;
 	private String repeatedPassword;
-	
-    private BLFacadeImplementation facade = new BLFacadeImplementation();
 
-	public UserRegistrationBean() {	
+	private BLFacadeImplementation facade = new BLFacadeImplementation();
+
+	public UserRegistrationBean() {
 	}
-	
-	public void register() {
+
+	public String register() {
 		if (!password.equals(repeatedPassword)) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Las contraseñas deben coincidir", null));
-			return;
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas deben coincidir", null));
+			return null;
 		}
-		
-		try {		
+
+		try {
 			facade.createDriver(email, nombre, password);
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Registrado correctamente", null));
@@ -30,6 +30,7 @@ public class UserRegistrationBean {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), null));
 		}
+		return "Login";
 	}
 
 	public String getEmail() {
@@ -55,11 +56,11 @@ public class UserRegistrationBean {
 	public void setRepeatedPassword(String repeatedPassword) {
 		this.repeatedPassword = repeatedPassword;
 	}
-	
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}

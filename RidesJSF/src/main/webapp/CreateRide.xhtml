@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Create Ride</title>
+        <h:outputStylesheet library="css" name="style.css" />
+    </h:head>
+    <h:body>
+        <div class="form-container">
+            <h:form>
+                <div class="form-row">
+                    <label for="departureCity">Departure City:</label>
+                    <h:inputText id="departureCity" value="#{createRideBean.departureCity}" />
+                </div>
+                <div class="form-row">
+                    <label for="arrivalCity">Arrival City:</label>
+                    <h:inputText id="arrivalCity" value="#{createRideBean.arrivalCity}" />
+                </div>
+                <div class="form-row">
+                    <label for="numberOfSeats">Number of Seats:</label>
+                    <h:inputText id="numberOfSeats" value="#{createRideBean.numberOfSeats}" />
+                </div>
+                <div class="form-row">
+                    <label for="price">Price:</label>
+                    <h:inputText id="price" value="#{createRideBean.price}" />
+                </div>
+                <div class="form-row centered-label">
+                    <label for="rideDate">Ride Date:</label>
+                </div>
+                <div class="form-row">
+                    <p:datePicker id="rideDate" value="#{createRideBean.rideDate}" 
+                                  inline="true" pattern="MM/dd/yyyy" />
+                </div>
+                <div class="form-row">
+                    <h:commandButton value="Create Ride" action="#{createRideBean.createRide}" />
+                    <h:commandButton value="Sign Out" action="#{createRideBean.signOut}" />
+                </div>
+            </h:form>
+        </div>
+    </h:body>
+</html>

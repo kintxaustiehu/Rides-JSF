@@ -12,26 +12,22 @@ import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Driver implements Serializable {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	@XmlID
-	@Id 
-	private String email;
-	private String name;
-	private String password;
-	@XmlIDREF
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
-	private List<Ride> rides=new Vector<Ride>();
+    @Id
+    private String email;
 
-	public Driver() {
-		super();
-	}
+    private String name;
+    private String password;
+
+    @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<Ride> rides = new Vector<>();
+
+    public Driver() {
+        super();
+    }
 
 	public Driver(String email, String name) {
 		this.email = email;

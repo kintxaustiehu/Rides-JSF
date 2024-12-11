@@ -64,6 +64,22 @@ public class QueryRidesBean {
         this.destino = destino;
     }
     
+    public List<String> getOrigenes() {
+        return this.origenes;
+    }
+
+    public void setOrigenes(List<String> origenes) {
+        this.origenes = origenes;
+    }
+    
+    public List<String> getDestinos() {
+        return this.destinos;
+    }
+
+    public void setDestinos(List<String> destinos) {
+        this.destinos = destinos;
+    }
+    
     public Date getFecha() {
         return this.fecha;
     }

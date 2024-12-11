@@ -43,30 +43,21 @@
 			<version>2.0.0</version>
 		</dependency>
 		<dependency>
+			<groupId>1.0</groupId>
+			<artifactId>Rides24</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
 			<version>12.0.0</version>
 			<classifier>jakarta</classifier>
 		</dependency>
-		<dependency>
-			<groupId>jakarta.validation</groupId>
-			<artifactId>jakarta.validation-api</artifactId>
-			<version>3.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate.validator</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>7.0.5.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.omnifaces</groupId>
-			<artifactId>omnifaces</artifactId>
-			<version>4.0.1</version>
-		</dependency>
-		<dependency>
-		 <groupId>org.hibernate</groupId>
-		 <artifactId>hibernate-core</artifactId>
-		 <version>5.6.15.Final</version>
+		<!-- Hibernate 5.x y JPA -->
+		 <dependency>
+			 <groupId>org.hibernate</groupId>
+			 <artifactId>hibernate-core</artifactId>
+			 <version>5.6.15.Final</version>
 		 </dependency>
 		 <dependency>
 			 <groupId>jakarta.persistence</groupId>

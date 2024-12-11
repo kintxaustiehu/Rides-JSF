@@ -15,43 +15,37 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @Entity
 public class Ride implements Serializable {
 	@XmlID
-	@Id 
-	@GeneratedValue
-	private Integer rideNumber;
-	private String from;
-	private String to;
-	private int nPlaces;
-	private Date date;
-	private float price;
-	
-	private Driver driver;  
-	
-	public Ride(){
-		super();
-	}
-	
-	public Ride(Integer rideNumber, String from, String to, Date date, int nPlaces, float price, Driver driver) {
-		super();
-		this.rideNumber = rideNumber;
-		this.from = from;
-		this.to = to;
-		this.nPlaces = nPlaces;
-		this.date=date;
-		this.price=price;
-		this.driver = driver;
-	}
+    @Id
+    @GeneratedValue
+    private Integer rideNumber;
 
-	
+    @Column(name = "origin") // Cambiado de "from" a "origin"
+    private String origin;
 
-	public Ride(String from, String to,  Date date, int nPlaces, float price, Driver driver) {
-		super();
-		this.from = from;
-		this.to = to;
-		this.nPlaces = nPlaces;
-		this.date=date;
-		this.price=price;
-		this.driver = driver;
-	}
+    @Column(name = "destination") // Cambiado de "to" a "destination"
+    private String destination;
+
+    private int nPlaces;
+    private Date date;
+    private float price;
+	
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "driver_email") // Relación con el driver usando email como clave foránea
+    private Driver driver;
+
+    public Ride() {
+        super();
+    }
+
+    public Ride(String origin, String destination, Date date, int nPlaces, float price, Driver driver) {
+        this.origin = origin;
+        this.destination = destination;
+        this.nPlaces = nPlaces;
+        this.date = date;
+        this.price = price;
+        this.driver = driver;
+    }
+
 	
 	/**
 	 * Get the  number of the ride
@@ -80,7 +74,7 @@ public class Ride implements Serializable {
 	 */
 
 	public String getFrom() {
-		return from;
+		return origin;
 	}
 
 
@@ -91,7 +85,7 @@ public class Ride implements Serializable {
 	 */	
 	
 	public void setFrom(String origin) {
-		this.from = origin;
+		this.origin = origin;
 	}
 
 	/**
@@ -101,7 +95,7 @@ public class Ride implements Serializable {
 	 */
 
 	public String getTo() {
-		return to;
+		return destination;
 	}
 
 
@@ -111,7 +105,7 @@ public class Ride implements Serializable {
 	 * @param destination to be set
 	 */	
 	public void setTo(String destination) {
-		this.to = destination;
+		this.destination = destination;
 	}
 
 	/**
@@ -181,7 +175,7 @@ public class Ride implements Serializable {
 
 
 	public String toString(){
-		return rideNumber+";"+";"+from+";"+to+";"+date;  
+		return rideNumber+";"+";"+origin+";"+destination+";"+date;  
 	}
 
 

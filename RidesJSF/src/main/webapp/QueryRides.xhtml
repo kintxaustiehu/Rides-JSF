@@ -14,8 +14,7 @@
 				<td>Origen</td>
 				<td>
 					<p:selectOneMenu id="origen"
-						value="#{queryRides.origen}"
-						converter="omnifaces.SelectItemsConverter">
+						value="#{queryRides.origen}">
 						<f:selectItems value="#{queryRides.origenes}" var="origen"
 							itemValue="#{origen}" itemLabel="#{origen}" />
 						<p:ajax event="change"
@@ -27,8 +26,7 @@
 			<tr>
 				<td>Destino</td>
 				<td><p:selectOneMenu id="destinoCity"
-						value="#{queryRides.destino}"
-						converter="omnifaces.SelectItemsConverter">
+						value="#{queryRides.destino}">
 						<f:selectItems value="#{queryRides.destinos}" var="destino"
 							itemValue="#{destino}" itemLabel="#{destino}" />
 					</p:selectOneMenu></td>

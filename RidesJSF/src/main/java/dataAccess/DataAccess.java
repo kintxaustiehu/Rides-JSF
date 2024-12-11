@@ -90,8 +90,8 @@ public class DataAccess {
     public List<String> getDepartCities() {
         EntityManager em = JPAUtil.getEntityManager();
         try {
-            return em.createQuery("SELECT DISTINCT origin FROM Ride ORDER BY origin", String.class)
-                     .getResultList();
+        	return em.createQuery("SELECT DISTINCT r.origin FROM Ride r ORDER BY r.origin", String.class)
+                    .getResultList();
         } finally {
             em.close();
         }
@@ -100,9 +100,9 @@ public class DataAccess {
     public List<String> getDestinationCities(String from) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
-            return em.createQuery("SELECT DISTINCT destination FROM Ride WHERE origin = :from ORDER BY r.destination", String.class)
-                     .setParameter("from", from)
-                     .getResultList();
+        	return em.createQuery("SELECT DISTINCT r.destination FROM Ride r WHERE r.origin = :from ORDER BY r.destination", String.class)
+                    .setParameter("from", from)
+                    .getResultList();
         } finally {
             em.close();
         }
@@ -111,11 +111,11 @@ public class DataAccess {
     public List<Ride> getRides(String from, String to, Date date) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
-            return em.createQuery("SELECT * FROM Ride WHERE r.origin = :from AND destination = :to AND date = :date", Ride.class)
-                     .setParameter("from", from)
-                     .setParameter("to", to)
-                     .setParameter("date", date)
-                     .getResultList();
+        	return em.createQuery("SELECT r FROM Ride r WHERE r.origin = :from AND r.destination = :to AND r.date = :date", Ride.class)
+                    .setParameter("from", from)
+                    .setParameter("to", to)
+                    .setParameter("date", date)
+                    .getResultList();
         } finally {
             em.close();
         }
@@ -126,7 +126,7 @@ public class DataAccess {
         try {
             em.getTransaction().begin();
 
-            Query query = em.createQuery("SELECT * FROM Driver WHERE email = :email");
+            Query query = em.createQuery("SELECT d FROM Driver d WHERE d.email = :email");
             query.setParameter("email", email);
             if (!query.getResultList().isEmpty()) {
                 throw new Exception("Ya existe un conductor con el mismo email");

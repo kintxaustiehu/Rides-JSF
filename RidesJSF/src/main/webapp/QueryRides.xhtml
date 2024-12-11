@@ -19,13 +19,13 @@
 							itemValue="#{origen}" itemLabel="#{origen}" />
 						<p:ajax event="change"
 							listener="#{queryRides.updateDestinos}"
-							update="destinoCity" />
+							update="destinos" />
 					</p:selectOneMenu>
 				</td>
 			</tr>
 			<tr>
 				<td>Destino</td>
-				<td><p:selectOneMenu id="destinoCity"
+				<td><p:selectOneMenu id="destinos"
 						value="#{queryRides.destino}">
 						<f:selectItems value="#{queryRides.destinos}" var="destino"
 							itemValue="#{destino}" itemLabel="#{destino}" />
@@ -45,7 +45,7 @@
 		</table>
 
         <!-- Resultados -->
-        <p:dataTable id="resultados" value="#{rideQueryBean.rides}" var="ride"
+        <p:dataTable id="resultados" value="#{queryRides.rides}" var="ride"
                      border="1" paginator="true" rows="10">
             <p:column headerText="Driver">
                 <h:outputText value="#{ride.driver.name}" />

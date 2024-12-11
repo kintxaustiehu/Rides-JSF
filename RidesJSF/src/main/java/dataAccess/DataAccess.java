@@ -15,14 +15,13 @@ import utils.JPAUtil;
 public class DataAccess {
 	private EntityManager em;
 
-	public DataAccess(Boolean initializeMode) {
-		this.em = JPAUtil.getEntityManager();
-		if(initializeMode)
-			initializeDB();
-	}
-
 	public DataAccess() {
-		new DataAccess(false);
+		this.em = JPAUtil.getEntityManager();
+		initializeDB();
+	}
+	
+	public DataAccess(EntityManager em) {
+		this.em = em;
 	}
 
 	/**
@@ -36,6 +35,7 @@ public class DataAccess {
 		em.getTransaction().begin();
 
 		try {
+			
 
 		   Calendar today = Calendar.getInstance();
 		   
@@ -44,38 +44,29 @@ public class DataAccess {
 		   if (month==12) { month=1; year+=1;}  
 	    
 		   
-		    //Create drivers 
-			Driver driver1=new Driver("driver1@gmail.com","Aitor Fernandez");
-			Driver driver2=new Driver("driver2@gmail.com","Ane Gaztañaga");
-			Driver driver3=new Driver("driver3@gmail.com","Test driver");
+		    //Create drivers	
+	   		Driver driver1 = new Driver("driver1@gmail.com","Aitor Fernandez");
+			Driver driver2 = new Driver("driver2@gmail.com","Ane Gaztañaga");
+			Driver driver3 = new Driver("driver3@gmail.com","Test driver");
 
 			
 			//Create rides
-			Ride ride1 = driver1.addRide("Donostia", "Bilbo", UtilDate.newDate(year,month,15), 4, 7);
-			Ride ride2 = driver1.addRide("Donostia", "Gazteiz", UtilDate.newDate(year,month,6), 4, 8);
-			Ride ride3 = driver1.addRide("Bilbo", "Donostia", UtilDate.newDate(year,month,25), 4, 4);
+			driver1.addRide("Donostia", "Bilbo", UtilDate.newDate(year,month,15), 4, 7);
+			driver1.addRide("Donostia", "Gazteiz", UtilDate.newDate(year,month,6), 4, 8);
+			driver1.addRide("Bilbo", "Donostia", UtilDate.newDate(year,month,25), 4, 4);
 
-			Ride ride4 = driver1.addRide("Donostia", "Iruña", UtilDate.newDate(year,month,7), 4, 8);
+			driver1.addRide("Donostia", "Iruña", UtilDate.newDate(year,month,7), 4, 8);
 			
-			Ride ride5 = driver2.addRide("Donostia", "Bilbo", UtilDate.newDate(year,month,15), 3, 3);
-			Ride ride6 = driver2.addRide("Bilbo", "Donostia", UtilDate.newDate(year,month,25), 2, 5);
-			Ride ride7 = driver2.addRide("Eibar", "Gasteiz", UtilDate.newDate(year,month,6), 2, 5);
+			driver2.addRide("Donostia", "Bilbo", UtilDate.newDate(year,month,15), 3, 3);
+			driver2.addRide("Bilbo", "Donostia", UtilDate.newDate(year,month,25), 2, 5);
+			driver2.addRide("Eibar", "Gasteiz", UtilDate.newDate(year,month,6), 2, 5);
 
-			Ride ride8 = driver3.addRide("Bilbo", "Donostia", UtilDate.newDate(year,month,14), 1, 3);
+			driver3.addRide("Bilbo", "Donostia", UtilDate.newDate(year,month,14), 1, 3);
 
 						
 			em.persist(driver1);
 			em.persist(driver2);
 			em.persist(driver3);
-			
-			em.persist(ride1);
-			em.persist(ride2);
-			em.persist(ride3);
-			em.persist(ride4);
-			em.persist(ride5);
-			em.persist(ride6);
-			em.persist(ride7);
-			em.persist(ride8);
 			
 
 			em.getTransaction().commit();
@@ -85,7 +76,6 @@ public class DataAccess {
 			e.printStackTrace();
 		}
 	}
-
 	
     public List<String> getDepartCities() {
         EntityManager em = JPAUtil.getEntityManager();
@@ -109,6 +99,7 @@ public class DataAccess {
     }
 
     public List<Ride> getRides(String from, String to, Date date) {
+    	System.out.println("getRides");
         EntityManager em = JPAUtil.getEntityManager();
         try {
         	return em.createQuery("SELECT r FROM Ride r WHERE r.origin = :from AND r.destination = :to AND r.date = :date", Ride.class)

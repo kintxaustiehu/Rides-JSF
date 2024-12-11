@@ -23,24 +23,26 @@ public class QueryRidesBean {
     public QueryRidesBean() {
         this.origenes = facade.getDepartCities();
         this.destinos =  new ArrayList<>();
+        if(!origenes.isEmpty()) {
+        	this.destinos = facade.getDestinationCities(origenes.get(0));
+        }
         this.rides = new ArrayList<>();
     }
     
     public void updateDestinos() {
         if (this.origen != null && !this.origen.isEmpty()) {
             this.destinos = facade.getDestinationCities(this.origen);
+            System.out.println("destinos: "+this.destinos.toString());
         } else {
             this.destino = null;
         }
     }
     
-    public boolean searchRides() {
+    public void searchRides() {
         if (this.origen != null && this.destino != null && this.fecha != null) {
             this.rides = facade.getRides(this.origen, this.destino, this.fecha);
-            if(this.rides.isEmpty()) return false;
-            return true;
+            System.out.println("resultados: "+this.rides.toString());
         }
-        return false;
     }
 
     // Getters y Setters

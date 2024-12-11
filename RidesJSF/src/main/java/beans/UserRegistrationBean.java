@@ -1,10 +1,5 @@
 package beans;
 
-import java.util.ArrayList;
-
-import java.util.List;
-
-import businessLogic.BLFacade;
 import businessLogic.BLFacadeImplementation;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -21,7 +16,6 @@ public class UserRegistrationBean {
 	}
 	
 	public void register() {
-		System.out.println("....");
 		if (!password.equals(repeatedPassword)) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Las contraseñas deben coincidir", null));

@@ -15,6 +15,19 @@ https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd"
             <redirect />
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+    <from-view-id>/MyRides.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>CreateRide</from-outcome>
+        <to-view-id>/CreateRide.xhtml</to-view-id>
+        <redirect />
+    </navigation-case>
+    <navigation-case>
+        <from-outcome>Login</from-outcome>
+        <to-view-id>/Login.xhtml</to-view-id>
+        <redirect />
+    </navigation-case>
+	</navigation-rule>
     <validator>
         <validator-id>customRegexValidator</validator-id>
         <validator-class>validators.CustomRegexValidator</validator-class>

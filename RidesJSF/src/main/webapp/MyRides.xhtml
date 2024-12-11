@@ -9,7 +9,6 @@
         <h:outputStylesheet library="css" name="style.css" />
     </h:head>
     <h:body>
-        <h:form>
             <div class="form-container">
                 <div class="form-row">
                     <h3>Welcome, 
@@ -22,7 +21,6 @@
                     </h4>
                 </div>
             </div>
-        </h:form>
         <div class="form-container">
             <h:dataTable id="tabla" value="#{myRides.rides}" var="item" border="1">
                 <f:facet name="header">Your rides:</f:facet>
@@ -46,11 +44,14 @@
                     <f:facet name="header">Price</f:facet>
                     #{item.getPrice()} 
                 </h:column>
-                <h:column>
-                    <f:facet name="header">Driver</f:facet>
-                    #{item.getDriver().getName()} 
-                </h:column>
             </h:dataTable>
+            <br></br>
+            <h:form>
+            	<div class="form-row">
+                    <h:commandButton value="Create Ride" action="#{myRides.createRide}" />
+					<h:commandButton value="Sign Out" action="#{myRides.signOut}" />
+            	</div>
+            </h:form>
         </div>
     </h:body>
 </html>

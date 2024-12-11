@@ -9,6 +9,7 @@ import configuration.UtilDate;
 import domain.Driver;
 import domain.Ride;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
 @Named("myRides")
@@ -56,4 +57,12 @@ public class MyRidesBean implements Serializable {
 		this.rides = rides;
 	}
 
+	public String createRide() {
+		return "CreateRide";
+	}
+
+	public String signOut() {
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return "Login";
+	}
 }

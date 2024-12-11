@@ -3,9 +3,9 @@ package businessLogic;
 import java.util.Date;
 import java.util.List;
 
+import domain.Driver;
 //import domain.Booking;
 import domain.Ride;
-import domain.Driver;
 
 /**
  * Interface that specifies the business logic.
@@ -47,4 +47,6 @@ public interface BLFacade {
 	 * @return the created driver, or throws an exception if driver already exists
 	 */
 	public Driver createDriver(String email, String password, String name) throws Exception;
+
+	public Driver validateUser(String email, String password);
 }

@@ -103,16 +103,11 @@ public class DataAccess {
     }
 
     public List<Ride> getRides(String origin, String destination, Date date) {
-        EntityManager em = JPAUtil.getEntityManager();
-        
-        try {        	
-        	return em.createQuery("SELECT r FROM Ride r WHERE r.origin = :origin AND r.destination = :destination", Ride.class)
-                    .setParameter("origin", origin)
-                    .setParameter("destination", destination)
-                    .getResultList();
-        } finally {
-            em.close();
-        }
+    	TypedQuery<Ride> query = em.createQuery("SELECT r FROM Ride r WHERE r.origin=?1 AND r.destination=?2 AND r.date=?3",Ride.class);
+        query.setParameter(1, origin);
+        query.setParameter(2, destination);
+        query.setParameter(3, date);
+        return query.getResultList();
     }
     
     public Driver createDriver(String email, String name, String password) throws Exception {

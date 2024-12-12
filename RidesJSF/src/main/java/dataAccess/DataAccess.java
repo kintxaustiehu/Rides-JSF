@@ -3,6 +3,7 @@ package dataAccess;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -101,11 +102,10 @@ public class DataAccess {
     public List<Ride> getRides(String origin, String destination, Date date) {
         EntityManager em = JPAUtil.getEntityManager();
         
-        try {
+        try {        	
         	return em.createQuery("SELECT r FROM Ride r WHERE r.origin = :origin AND r.destination = :destination", Ride.class)
                     .setParameter("origin", origin)
                     .setParameter("destination", destination)
-                    .setParameter("date", date)
                     .getResultList();
         } finally {
             em.close();

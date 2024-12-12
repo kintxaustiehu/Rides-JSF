@@ -48,18 +48,21 @@
 		<h:link value="Crear nuevo Ride" outcome="/CreateRide.xhtml"/>
 
         <!-- Resultados -->
-        <p:dataTable id="resultados" value="#{queryRides.rides}" var="ride"
-                     border="1" paginator="true" rows="10">
-            <p:column headerText="Driver">
-                <h:outputText value="#{ride.driver.name}" />
-            </p:column>
-            <p:column headerText="Seats">
-                <h:outputText value="#{ride.nPlaces}" />
-            </p:column>
-            <p:column headerText="Price">
-                <h:outputText value="#{ride.price}" />
-            </p:column>
-        </p:dataTable>
+        <h:dataTable id="resultados" value="#{queryRides.rides}" var="item" border="1">
+                <f:facet name="header">Your rides:</f:facet>
+                <h:column>
+                    <f:facet name="header">Driver</f:facet>
+                    #{item.getDriver().getName()} 
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Seats</f:facet>
+                    #{item.getnPlaces()} 
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Price</f:facet>
+                    #{item.getPrice()} 
+                </h:column>
+            </h:dataTable>
     </h:form>
 </h:body>
 </html>

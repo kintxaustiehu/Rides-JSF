@@ -22,7 +22,7 @@ public class Driver implements Serializable {
 	private String name;
 	private String password;
 
-	@OneToMany(mappedBy = "driver", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "driver", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	public List<Ride> rides = new Vector<>();
 
 	public Driver() {

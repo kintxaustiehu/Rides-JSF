@@ -26,6 +26,7 @@ public class Ride implements Serializable {
     private String destination;
 
     private int nPlaces;
+    @Column(name = "date")
     private Date date;
     private float price;
 	

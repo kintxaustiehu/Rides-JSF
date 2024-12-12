@@ -40,6 +40,7 @@ public class QueryRidesBean {
     
     public void searchRides() {
         if (this.origen != null && this.destino != null && this.fecha != null) {
+        	System.out.println("searchRides "+this.origen+" "+this.destino+ " "+this.fecha);
             this.rides = facade.getRides(this.origen, this.destino, this.fecha);
             System.out.println("resultados: "+this.rides.toString());
         }

@@ -98,12 +98,13 @@ public class DataAccess {
         }
     }
 
-    public List<Ride> getRides(String from, String to, Date date) {
+    public List<Ride> getRides(String origin, String destination, Date date) {
         EntityManager em = JPAUtil.getEntityManager();
+        
         try {
-        	return em.createQuery("SELECT r FROM Ride r WHERE r.origin = :from AND r.destination = :to AND r.date = :date", Ride.class)
-                    .setParameter("from", from)
-                    .setParameter("to", to)
+        	return em.createQuery("SELECT r FROM Ride r WHERE r.origin = :origin AND r.destination = :destination", Ride.class)
+                    .setParameter("origin", origin)
+                    .setParameter("destination", destination)
                     .setParameter("date", date)
                     .getResultList();
         } finally {

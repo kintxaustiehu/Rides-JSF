@@ -48,5 +48,20 @@ public interface BLFacade {
 	 */
 	public Driver createDriver(String email, String password, String name) throws Exception;
 
+	/**
+	 * This method validates a user's credentials
+	 * 
+	 * @param email    driver's email
+	 * @param password driver's password
+	 * @return the validated driver, or null if credentials are invalid
+	 */
 	public Driver validateUser(String email, String password);
+
+	/**
+	 * This method retrieves all rides for a specific user by their username (email)
+	 * 
+	 * @param username the email of the driver
+	 * @return list of rides for the specified user
+	 */
+	public List<Ride> getRidesByUsername(String username);
 }

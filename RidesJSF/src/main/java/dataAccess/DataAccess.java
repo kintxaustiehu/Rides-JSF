@@ -1,11 +1,14 @@
 package dataAccess;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import configuration.UtilDate;
 import domain.Driver;
@@ -49,6 +52,9 @@ public class DataAccess {
 			Driver driver1 = new Driver("driver1@gmail.com", "Aitor Fernandez");
 			Driver driver2 = new Driver("driver2@gmail.com", "Ane Gaztañaga");
 			Driver driver3 = new Driver("driver3@gmail.com", "Test driver");
+			Driver driver4 = new Driver("driver4@gmail.com", "Test driver2");
+
+			driver4.setPassword("password"); // Driver para pruebas
 
 			// Create rides
 			driver1.addRide("Donostia", "Bilbo", UtilDate.newDate(year, month, 15), 4, 7);
@@ -63,9 +69,14 @@ public class DataAccess {
 
 			driver3.addRide("Bilbo", "Donostia", UtilDate.newDate(year, month, 14), 1, 3);
 
+			driver4.addRide("Donostia", "Bilbo", UtilDate.newDate(year, month, 15), 3, 3);
+			driver4.addRide("Bilbo", "Donostia", UtilDate.newDate(year, month, 25), 2, 5);
+			driver4.addRide("Eibar", "Gasteiz", UtilDate.newDate(year, month, 6), 2, 5);
+
 			em.persist(driver1);
 			em.persist(driver2);
 			em.persist(driver3);
+			em.persist(driver4);
 
 			em.getTransaction().commit();
 			System.out.println("Db initialized");
@@ -149,6 +160,32 @@ public class DataAccess {
 				return result.get(0); // Return the first matching user
 			}
 			return null; // No user found
+		} finally {
+			em.close();
+		}
+	}
+
+	public List<Ride> getRidesByUsername(String username) {
+		EntityManager em = JPAUtil.getEntityManager();
+		try {
+			// First, find the driver by email (username)
+			TypedQuery<Driver> driverQuery = em.createQuery("SELECT d FROM Driver d WHERE d.email = :email",
+					Driver.class);
+			driverQuery.setParameter("email", username);
+
+			try {
+				Driver driver = driverQuery.getSingleResult();
+
+				// Then, fetch rides for that driver
+				TypedQuery<Ride> ridesQuery = em.createQuery("SELECT r FROM Ride r WHERE r.driver = :driver",
+						Ride.class);
+				ridesQuery.setParameter("driver", driver);
+
+				return ridesQuery.getResultList();
+			} catch (NoResultException e) {
+				// No driver found with this username
+				return new ArrayList<>();
+			}
 		} finally {
 			em.close();
 		}

@@ -67,6 +67,9 @@ public class LoginBean implements Serializable {
 			return null;
 		}
 
+		// Store username in session
+		context.getExternalContext().getSessionMap().put("username", username);
+
 		// User successfully authenticated
 		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Login successful", null));
 		return "ok"; // Navigate to the next page
@@ -76,5 +79,4 @@ public class LoginBean implements Serializable {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "Register";
 	}
-
 }

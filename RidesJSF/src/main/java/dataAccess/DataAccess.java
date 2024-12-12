@@ -1,12 +1,15 @@
 package dataAccess;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import configuration.UtilDate;
 import domain.Driver;
@@ -191,6 +194,32 @@ public class DataAccess {
 				return result.get(0); // Return the first matching user
 			}
 			return null; // No user found
+		} finally {
+			em.close();
+		}
+	}
+    
+    public List<Ride> getRidesByUsername(String username) {
+		EntityManager em = JPAUtil.getEntityManager();
+		try {
+			// First, find the driver by email (username)
+			TypedQuery<Driver> driverQuery = em.createQuery("SELECT d FROM Driver d WHERE d.email = :email",
+					Driver.class);
+			driverQuery.setParameter("email", username);
+
+			try {
+				Driver driver = driverQuery.getSingleResult();
+
+				// Then, fetch rides for that driver
+				TypedQuery<Ride> ridesQuery = em.createQuery("SELECT r FROM Ride r WHERE r.driver = :driver",
+						Ride.class);
+				ridesQuery.setParameter("driver", driver);
+
+				return ridesQuery.getResultList();
+			} catch (NoResultException e) {
+				// No driver found with this username
+				return new ArrayList<>();
+			}
 		} finally {
 			em.close();
 		}

@@ -38,6 +38,10 @@ public class BLFacadeImplementation implements Serializable{
 		return dataAccess.validateUser(email, password);
 	}
     
+    public List<Ride> getRidesByUsername(String username) {
+		return dataAccess.getRidesByUsername(username);
+	}
+    
     public Driver getDriver(String email) {
     	return dataAccess.getDriver(email);
     }

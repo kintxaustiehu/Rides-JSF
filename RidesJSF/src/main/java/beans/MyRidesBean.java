@@ -50,9 +50,4 @@ public class MyRidesBean implements Serializable {
 	public String createRide() {
 		return "CreateRide";
 	}
-
-	public String signOut() {
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		return "Login";
-	}
 }

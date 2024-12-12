@@ -47,9 +47,10 @@
             </h:dataTable>
             <br></br>
             <h:form>
-            	<div class="form-row">
+            	<div>
+            		<h:link value="Sign Out" outcome="/Login.xhtml"/><br/>
+            		<h:link value="Query Rides" outcome="/QueryRides.xhtml"/><br/>
                     <h:commandButton value="Create Ride" action="#{myRides.createRide}" />
-					<h:commandButton value="Sign Out" action="#{myRides.signOut}" />
             	</div>
             </h:form>
         </div>

@@ -26,8 +26,8 @@ public class BLFacadeImplementation implements Serializable{
         return dataAccess.createDriver(email, name, password);
     }
     
-    public List<Driver> getAllDrivers() {
-        return dataAccess.getAllDrivers();
+    public List<String> getAllDriverEmails() {
+        return dataAccess.getAllDriverEmails();
     }
     
     public void createRide(String origen, String destino, Date date, int nPlaces, float price, Driver driver) throws Exception {
@@ -37,4 +37,8 @@ public class BLFacadeImplementation implements Serializable{
     public Driver validateUser(String email, String password) {
 		return dataAccess.validateUser(email, password);
 	}
+    
+    public Driver getDriver(String email) {
+    	return dataAccess.getDriver(email);
+    }
 }

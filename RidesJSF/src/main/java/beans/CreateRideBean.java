@@ -15,15 +15,14 @@ public class CreateRideBean {
     private Date fecha;
     private int nPlaces;
     private float price;
-    private Driver selectedDriver;
+    private String selectedDriver;
 
-    private List<Driver> drivers;
+    private List<String> drivers;
     private BLFacadeImplementation facade;
 
     public CreateRideBean() {
         this.facade = new BLFacadeImplementation();
-        this.drivers = facade.getAllDrivers();
-        System.out.println("drivers "+drivers.toString());
+        this.drivers = facade.getAllDriverEmails();
     }
 
     public String createRide() {
@@ -33,8 +32,10 @@ public class CreateRideBean {
                         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Debe seleccionar un conductor", null));
                 return null;
             }
+            
+            Driver driver = facade.getDriver(selectedDriver); 
 
-            facade.createRide(origen, destino, fecha, nPlaces, price, selectedDriver);
+            facade.createRide(origen, destino, fecha, nPlaces, price, driver);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Viaje creado correctamente", null));
             return "QueryRides?faces-redirect=true";
@@ -85,19 +86,19 @@ public class CreateRideBean {
         this.price = price;
     }
 
-    public Driver getSelectedDriver() {
+    public String getSelectedDriver() {
         return selectedDriver;
     }
 
-    public void setSelectedDriver(Driver selectedDriver) {
+    public void setSelectedDriver(String selectedDriver) {
         this.selectedDriver = selectedDriver;
     }
 
-    public List<Driver> getDrivers() {
+    public List<String> getDrivers() {
         return drivers;
     }
 
-    public void setDrivers(List<Driver> drivers) {
+    public void setDrivers(List<String> drivers) {
         this.drivers = drivers;
     }
 }

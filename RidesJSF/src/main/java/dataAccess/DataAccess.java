@@ -138,10 +138,21 @@ public class DataAccess {
         }
     }
     
-    public List<Driver> getAllDrivers() {
+    public List<String> getAllDriverEmails() {
         EntityManager em = JPAUtil.getEntityManager();
         try {
-            return em.createQuery("SELECT d FROM Driver d", Driver.class).getResultList();
+            return em.createQuery("SELECT DISTINCT d.email FROM Driver d", String.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public Driver getDriver(String email) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            return em.createQuery("SELECT d FROM Driver d where d.email = :email", Driver.class)
+            		.setParameter("email", email)
+            		.getSingleResult();
         } finally {
             em.close();
         }
